@@ -8,6 +8,8 @@ import  JobCard  from "./components/JobCard.tsx"
 export default function App() {
       const [jobs, setJobs] = useState<Job[]>([]);
       const [isLoading, setIsLoading] = useState(true);
+      const [errorMessage, setErrorMessage] =
+          useState<string | null>(null);
 
 
       useEffect(()=> {
@@ -21,6 +23,10 @@ export default function App() {
                 "Failed to load jobs: ",
                 error
               );
+
+              setErrorMessage(
+                "Unable to load jobs. Please try again."
+              );
             }finally {
               setIsLoading(false);
             }
@@ -31,6 +37,10 @@ export default function App() {
 
       if(isLoading) {
         return <p>Loading jobs...</p>;
+      }
+
+      if(errorMessage) {
+        return <p>{errorMessage}</p>;
       }
 
       return(
