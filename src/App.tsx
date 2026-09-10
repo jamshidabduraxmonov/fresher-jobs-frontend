@@ -47,6 +47,12 @@ export default function App() {
         <main>
           <h1>Fresher Jobs UAE</h1>
 
+          {
+            jobs.length === 0 && (
+              <p>No jobs are currently available.</p>
+            )
+          }
+
           {jobs.map((job)=> (
             <JobCard job={job}  key={job.id}/>
           ))}
