@@ -11,6 +11,9 @@ export default function App() {
       const [isLoading, setIsLoading] = useState(true);
       const [errorMessage, setErrorMessage] =
           useState<string | null>(null);
+      
+      const [selectedCategory, setSelectedCategory] =
+       useState<string>("");
 
 
       useEffect(()=> {
