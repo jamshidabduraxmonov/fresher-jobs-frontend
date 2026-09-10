@@ -19,11 +19,17 @@ const JobCard = ({ job } : JobCardProps) => {
                 {job.city || "Location not provided"}
             </p>
 
+            <p className="mt-1 text-sm text-slate-500">
+                {job.categories || "Category not provided"}
+            </p>
+
             {job.fresherFriendly && (
                 <span className="mt-4 inline-block rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
-
+                    FresherFriendly
                 </span>
             )}
+
+            
         </article>
     );
 };

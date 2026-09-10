@@ -18,8 +18,14 @@ export default function App() {
 
       useEffect(()=> {
           const loadJobs = async ()=> {
+            
+            setIsLoading(true);
+            setErrorMessage(null);
+
             try {
-              const data = await fetchJobs();
+              const data = await fetchJobs({
+                category: selectedCategory,
+              });
 
               setJobs(data.jobs);
             }catch(error){
@@ -37,7 +43,7 @@ export default function App() {
           };
 
           loadJobs();
-      }, []);
+      }, [selectedCategory]);
 
       // if(isLoading) {
       //   return <p>Loading jobs...</p>;
@@ -53,6 +59,28 @@ export default function App() {
               <h1 className="mb-6 text-2xl font-bold">
                 Fresher Jobs UAE
               </h1>
+              
+              <div>
+                <button
+                    type="button"
+                    onClick={() => setSelectedCategory("")}
+                    aria-pressed={selectedCategory === ""}
+                    className="rounded-lg border px-4 py-2"
+                >
+                  All Jobs
+                </button>
+
+                <button
+                    type="button"
+                    onClick={()=> setSelectedCategory("retail")}
+                    aria-pressed={selectedCategory === "retail"}
+                    className="rounded-lg border px-4 py-2"
+                >
+                  Retail
+                </button>
+              </div>
+
+
 
 
               {isLoading && (
