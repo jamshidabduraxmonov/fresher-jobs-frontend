@@ -8,16 +8,22 @@ type JobCardProps = {
 
 const JobCard = ({ job } : JobCardProps) => {
     return(
-        <article>
-            <h2>{job.title}</h2>
+        <article className="rounded-xl border border-slate-200 bg-white p-5">
+            <h2 className="text-lg font-semibold text-slate-900">{job.title}</h2>
 
-            <p>
+            <p className="mt-2 text-sm text-slate-700">
                 {job.company || "Company not provided"}
             </p>
 
-            <p>
+            <p className="mt-1 text-sm text-slate-500">
                 {job.city || "Location not provided"}
             </p>
+
+            {job.fresherFriendly && (
+                <span className="mt-4 inline-block rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
+
+                </span>
+            )}
         </article>
     );
 };

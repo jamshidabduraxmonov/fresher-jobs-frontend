@@ -1,3 +1,4 @@
+import "./index.css";
 import { useEffect, useState } from "react";
 import { fetchJobs } from "./api/jobsApi";
 import type {Job} from "./types/job";
@@ -44,18 +45,25 @@ export default function App() {
       }
 
       return(
-        <main>
-          <h1>Fresher Jobs UAE</h1>
+        <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-900">
+          <div className="mx-auto max-w-2xl">
+              <h1 className="mb-6 text-2xl font-bold">
+                Fresher Jobs UAE
+              </h1>
 
-          {
-            jobs.length === 0 && (
-              <p>No jobs are currently available.</p>
-            )
-          }
-
-          {jobs.map((job)=> (
-            <JobCard job={job}  key={job.id}/>
-          ))}
+              {
+                jobs.length === 0 && (
+                  <p>No jobs are currently available.</p>
+                )
+              }
+              <div>
+                  {jobs.map((job)=> (
+                    <JobCard job={job}  key={job.id}/>
+                  ))}
+              </div>
+              
+          </div>
+          
         </main>
       );
 }
