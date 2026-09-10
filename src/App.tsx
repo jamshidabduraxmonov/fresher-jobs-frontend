@@ -36,13 +36,13 @@ export default function App() {
           loadJobs();
       }, []);
 
-      if(isLoading) {
-        return <p>Loading jobs...</p>;
-      }
+      // if(isLoading) {
+      //   return <p>Loading jobs...</p>;
+      // }
 
-      if(errorMessage) {
-        return <p>{errorMessage}</p>;
-      }
+      // if(errorMessage) {
+      //   return <p>{errorMessage}</p>;
+      // }
 
       return(
         <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-900">
@@ -51,16 +51,38 @@ export default function App() {
                 Fresher Jobs UAE
               </h1>
 
-              {
-                jobs.length === 0 && (
-                  <p>No jobs are currently available.</p>
+
+              {isLoading && (
+                <p role="status"
+                   className="rounded-xl bg-white p-6 text-center text-slate-600"
+                >
+                  Loading jobs...
+                </p>
+              )}
+
+              {!isLoading && errorMessage && (
+                <p 
+                  role="alert"
+                  className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700"
+                >
+                  {errorMessage}
+                </p>
+              )}
+
+
+              {!isLoading && !errorMessage && (
+                jobs.length === 0 ? (
+                  <p className="rounded-xl bg-white p-6 text-center text-slate-600">
+                    No jobs are currently available.
+                  </p>
+                ) : (
+                  <div className="space-y-4">
+                    {jobs.map((job)=> (
+                      <JobCard job={job}  key={job.id}/>
+                    ))}
+                  </div>
                 )
-              }
-              <div>
-                  {jobs.map((job)=> (
-                    <JobCard job={job}  key={job.id}/>
-                  ))}
-              </div>
+              )}
               
           </div>
           
