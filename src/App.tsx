@@ -11,6 +11,7 @@ const categories = [
   {value: "retail", label: "Retail"},
   {value: "customer_service", label: "Customer Service"},
   {value: "general_service", label: "General Service"},
+  {value: "freshers", label: "Fresher Jobs"},
 ]
 
 
@@ -21,7 +22,9 @@ export default function App() {
           useState<string | null>(null);
       
       const [selectedCategory, setSelectedCategory] =
-       useState<string>("food_beverage");
+       useState<string>("freshers");
+
+      const [fresherOnly, setFresherOnly] = useState(false);
 
 
       useEffect(()=> {
@@ -32,7 +35,14 @@ export default function App() {
 
             try {
               const data = await fetchJobs({
-                category: selectedCategory,
+                category: 
+                  selectedCategory === "freshers"
+                    ? undefined
+                    : selectedCategory,
+                fresherFriendly: 
+                    selectedCategory === "freshers"
+                        ? true
+                        : undefined
               });
 
               setJobs(data.jobs);
@@ -53,13 +63,6 @@ export default function App() {
           loadJobs();
       }, [selectedCategory]);
 
-      // if(isLoading) {
-      //   return <p>Loading jobs...</p>;
-      // }
-
-      // if(errorMessage) {
-      //   return <p>{errorMessage}</p>;
-      // }
 
       return(
         <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-900">
