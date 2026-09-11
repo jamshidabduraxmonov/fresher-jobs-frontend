@@ -5,6 +5,14 @@ import type {Job} from "./types/job";
 import  JobCard  from "./components/JobCard.tsx"
 
 
+const categories = [
+  {value: "food_beverage", label: "Food & Beverage"},
+  {value: "hospitality", label: "Hospitality"},
+  {value: "retail", label: "Retail"},
+  {value: "customer_service", label: "Customer Service"},
+  {value: "general_service", label: "General Service"},
+]
+
 
 export default function App() {
       const [jobs, setJobs] = useState<Job[]>([]);
@@ -13,7 +21,7 @@ export default function App() {
           useState<string | null>(null);
       
       const [selectedCategory, setSelectedCategory] =
-       useState<string>("");
+       useState<string>("food_beverage");
 
 
       useEffect(()=> {
@@ -60,24 +68,23 @@ export default function App() {
                 Fresher Jobs UAE
               </h1>
               
-              <div>
-                <button
-                    type="button"
-                    onClick={() => setSelectedCategory("")}
-                    aria-pressed={selectedCategory === ""}
-                    className="rounded-lg border px-4 py-2"
-                >
-                  All Jobs
-                </button>
-
-                <button
-                    type="button"
-                    onClick={()=> setSelectedCategory("retail")}
-                    aria-pressed={selectedCategory === "retail"}
-                    className="rounded-lg border px-4 py-2"
-                >
-                  Retail
-                </button>
+              <div className="mb-6 flex flex-wrap gap-2">
+                  {
+                    categories.map(category => (
+                      <button
+                            key={category.value}
+                            type="button"
+                            onClick={()=> setSelectedCategory(category.value)}
+                            aria-pressed={selectedCategory === category.value}
+                            className={`rounded-lg border px-4 py-2 ${
+                              selectedCategory === category.value
+                                    ? "border-slate-900 bg-slate-900 text-white"
+                                    : "border-slate-300 bg-white text-slate-700"
+                            }`}
+                      >
+                        {category.label}
+                      </button>
+                    ))}
               </div>
 
 
