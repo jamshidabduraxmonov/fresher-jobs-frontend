@@ -1,5 +1,6 @@
 import CategoryJobsPage from "./pages/CategoryJobsPage.tsx";
 import { Routes, Route } from "react-router"
+import HomePage  from "./pages/HomePage.tsx"
 
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
       <Routes>
           <Route
               path="/"
-              element={<p>Category grid coming next.</p>}
+              element={<HomePage />}
               />
 
           <Route 
