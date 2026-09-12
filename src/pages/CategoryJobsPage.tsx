@@ -4,7 +4,7 @@ import { fetchJobs } from "../api/jobsApi.ts";
 import type {Job} from "../types/job.ts";
 import  JobCard  from "../components/JobCard.tsx"
 import { categories } from "../data/categories.ts";
-import { useParams } from "react-router"
+import { Link, useParams } from "react-router"
 
 
 
@@ -79,8 +79,15 @@ export default function CategoryJobsPage() {
       return(
         <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-900">
           <div className="mx-auto max-w-2xl">
+              <Link
+                  to="/"
+                  className="mb-4 inline-block text-sm font-medium text-slate-600 hover:text-slate-900"
+              >
+                  ← Back to categories
+              </Link>
+
               <h1 className="mb-6 text-2xl font-bold">
-                Fresher Jobs UAE
+                {activeCategory.label}
               </h1>
 
 
