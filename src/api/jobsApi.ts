@@ -1,4 +1,4 @@
-import type { JobsResponse } from "../types/job";
+import type { JobsResponse, JobResponse } from "../types/job";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -35,6 +35,25 @@ export const fetchJobs = async (filters: JobFilters = {}): Promise<JobsResponse>
 
     const data: JobsResponse =
         await response.json();
+
+    return data;
+}
+
+export const fetchJobById = async (
+    id: string
+): Promise<JobResponse> => {
+    const response = await fetch(
+        `${apiURL}/api/jobs/${encodeURIComponent(id)}`
+    );
+
+    if(!response.ok){
+        throw new Error(
+            `Failed to fetch job: ${response.status}`
+        );
+    }
+
+
+    const data: JobResponse = await response.json();
 
     return data;
 }
