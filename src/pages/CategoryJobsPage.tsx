@@ -26,6 +26,8 @@ export default function CategoryJobsPage() {
 
         if(!activeCategory) return;
 
+        let ignore = false;
+
           const loadJobs = async ()=> {
             
             setIsLoading(true);
@@ -43,22 +45,34 @@ export default function CategoryJobsPage() {
                         : undefined
               });
 
-              setJobs(data.jobs);
+              if(!ignore) {
+                setJobs(data.jobs);
+              }
+              
             }catch(error){
               console.error(
                 "Failed to load jobs: ",
                 error
               );
 
-              setErrorMessage(
-                "Unable to load jobs. Please try again."
-              );
+              if(!ignore){
+                setErrorMessage(
+                  "Unable to load jobs. Please try again."
+                );
+              }
+              
             }finally {
-              setIsLoading(false);
+              if(!ignore){
+                setIsLoading(false);
+              }
             }
           };
 
           loadJobs();
+
+          return ()=> {
+            ignore = true;
+          }
       }, [activeCategory, selectedCategory]);
 
 
