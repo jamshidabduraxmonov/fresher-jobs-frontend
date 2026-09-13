@@ -28,3 +28,8 @@ export type JobsResponse = {
     jobs: Job[];
     pagination: Pagination;
 };
+
+
+export type JobResponse = {
+    job: Job;
+};
