@@ -1,17 +1,20 @@
 import type { Job } from "../types/job";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 type JobCardProps = {
     job: Job;
 };
 
 
-
 const JobCard = ({ job } : JobCardProps) => {
+
+    const location = useLocation();
+
     return(
         <article className="rounded-xl border border-slate-200 bg-white p-5">
             <h2 className="text-lg font-semibold text-slate-900">{
             <Link
+                state={{ from: location.pathname }}
                 to={`/jobs/${encodeURIComponent(job.id)}`}
                 className="hover:underline"
             >

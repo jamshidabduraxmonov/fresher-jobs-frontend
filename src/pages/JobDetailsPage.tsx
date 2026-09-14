@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link, useLocation } from "react-router";
 import type { Job } from "../types/job";
 import { fetchJobById } from "../api/jobsApi"
 import { useEffect, useState } from "react";
@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 export default function JobDetailsPage() {
     const { id } = useParams();
+    const location = useLocation();
+    const backPath = location.state?.from ?? "/";
 
     const [job, setJob] = useState<Job | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -67,6 +69,14 @@ export default function JobDetailsPage() {
 
     return (
         <main className="min-h-screen bg-slate-100 px-4 py-8">
+
+            <Link
+                to={backPath}
+                className="mb-4 inline-block text-sm font-medium text-slate-600 hover:text-slate-900"
+            >
+                {backPath === "/" ? "← Back to categories" : "← Back to jobs"}
+            </Link>
+
             <h1 className="text-2xl font-bold">
                 {job.title}
             </h1>
