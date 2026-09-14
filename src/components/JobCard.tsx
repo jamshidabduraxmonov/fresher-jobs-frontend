@@ -1,4 +1,5 @@
 import type { Job } from "../types/job";
+import { Link } from "react-router";
 
 type JobCardProps = {
     job: Job;
@@ -9,7 +10,15 @@ type JobCardProps = {
 const JobCard = ({ job } : JobCardProps) => {
     return(
         <article className="rounded-xl border border-slate-200 bg-white p-5">
-            <h2 className="text-lg font-semibold text-slate-900">{job.title}</h2>
+            <h2 className="text-lg font-semibold text-slate-900">{
+            <Link
+                to={`/jobs/${encodeURIComponent(job.id)}`}
+                className="hover:underline"
+            >
+                {job.title}
+            </Link>    
+                
+            }</h2>
 
             <p className="mt-2 text-sm text-slate-700">
                 {job.company || "Company not provided"}
