@@ -83,6 +83,18 @@ export default function JobDetailsPage() {
                 {job.description || "No description provided."}
             </p>
 
+            {job.sourceURL && (
+                <a
+                    href={job.sourceURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-700"
+                >
+                    Apply on original website
+                </a>
+            )
+
+            }
             
         </main>
     )
