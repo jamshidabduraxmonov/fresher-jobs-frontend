@@ -1,10 +1,10 @@
 import "../index.css";
 import { useEffect, useState } from "react";
 import { fetchJobs } from "../api/jobsApi.ts";
-import type {Job} from "../types/job.ts";
+import type {Job, Pagination} from "../types/job.ts";
 import  JobCard  from "../components/JobCard.tsx"
 import { categories } from "../data/categories.ts";
-import { Link, useParams } from "react-router"
+import { Link, useParams, useSearchParams } from "react-router";
 
 
 
@@ -13,13 +13,29 @@ export default function CategoryJobsPage() {
       const [isLoading, setIsLoading] = useState(true);
       const [errorMessage, setErrorMessage] =
           useState<string | null>(null);
+
+      const [pagination, setPagination] = useState<Pagination | null>(null);
       
       const { category: selectedCategory } = useParams();
+
+      const [searchParams, setSearchParams] = useSearchParams();
+
+      const requestedPage = Number(searchParams.get("page") ?? "1");
+
+      const currentPage = Number.isInteger(requestedPage) && requestedPage > 0
+              ? requestedPage
+              : 1;
 
       const activeCategory = categories.find(
         (category)=> category.value === selectedCategory
       );
   
+
+      const changePage = (page: number)=> {
+        const nextParams = new URLSearchParams(searchParams);
+        nextParams.set("page", String(page));
+        setSearchParams(nextParams);
+      }
 
 
       useEffect(()=> {
@@ -33,6 +49,8 @@ export default function CategoryJobsPage() {
             setIsLoading(true);
             setErrorMessage(null);
 
+            setPagination(null);
+
             try {
               const data = await fetchJobs({
                 category: 
@@ -42,11 +60,15 @@ export default function CategoryJobsPage() {
                 fresherFriendly: 
                     selectedCategory === "freshers"
                         ? true
-                        : undefined
+                        : undefined,
+
+                page: currentPage,
+                limit: 20,
               });
 
               if(!ignore) {
                 setJobs(data.jobs);
+                setPagination(data.pagination);
               }
               
             }catch(error){
@@ -73,7 +95,7 @@ export default function CategoryJobsPage() {
           return ()=> {
             ignore = true;
           }
-      }, [activeCategory, selectedCategory]);
+      }, [activeCategory, selectedCategory, currentPage]);
 
 
       if(!activeCategory){
@@ -137,6 +159,35 @@ export default function CategoryJobsPage() {
                   </div>
                 )
               )}
+
+
+              {!isLoading && !errorMessage && pagination && pagination.totalPages > 0 && (
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => changePage(currentPage -1)}
+                        disabled={!pagination.hasPreviousPage}
+                        className="rounded-lg border px-4 py-2 disabled:opacity-40"
+                    >
+                        Previous
+                    </button>
+
+                    <span>
+                        Page {pagination.page} of {pagination.totalPages}
+                    </span>
+
+                    <button
+                        type="button"
+                        onClick={()=> changePage(currentPage + 1)}
+                        disabled={!pagination.hasNextPage}
+                        className="rounded-lg border px-4 py-2 disabled:opacity-40"
+                    >
+                        Next
+                    </button>
+                </div>
+              )
+
+              }
               
           </div>
           

@@ -5,10 +5,20 @@ const apiURL = import.meta.env.VITE_API_URL;
 type JobFilters = {
     category?: string;
     fresherFriendly?: boolean;
+    page?: number;
+    limit?: number;
 };
 export const fetchJobs = async (filters: JobFilters = {}): Promise<JobsResponse> => {
 
     const params = new URLSearchParams();
+
+    if(filters.page !== undefined) {
+        params.set("page", String(filters.page));
+    }
+
+    if(filters.limit !== undefined) {
+        params.set("limit", String(filters.limit));
+    }
 
     if(filters.fresherFriendly !== undefined){
         params.set(
