@@ -14,7 +14,7 @@ const JobCard = ({ job } : JobCardProps) => {
         <article className="rounded-xl border border-slate-200 bg-white p-5">
             <h2 className="text-lg font-semibold text-slate-900">{
             <Link
-                state={{ from: location.pathname }}
+                state={{ from: location.pathname + location.search }}
                 to={`/jobs/${encodeURIComponent(job.id)}`}
                 className="hover:underline"
             >
