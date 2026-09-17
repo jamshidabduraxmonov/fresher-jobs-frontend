@@ -14,6 +14,8 @@ export default function JobDetailsPage() {
     const [errorMessage, setErrorMessage] =
         useState<string | null>(null);
 
+    const [retryCount, setRetryCount] = useState(0);
+
 
     useEffect(()=> {
         if(!id) return;
@@ -52,7 +54,7 @@ export default function JobDetailsPage() {
         return () => {
             ignore = true;
         };
-    }, [id]);
+    }, [id, retryCount]);
 
   
 
@@ -70,7 +72,19 @@ export default function JobDetailsPage() {
             {isLoading && <p>Loading job details...</p>}
 
             {!isLoading && errorMessage && (
-                <p role="alert">{errorMessage}</p>
+
+                <div>
+                    <p role="alert">{errorMessage}</p>
+
+                    <button
+                        type="button"
+                        onClick={()=> setRetryCount(count=> count+1)}
+                        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+                    >
+                        Try again
+                    </button>
+                </div>
+                
             )}
 
             {!isLoading && !errorMessage && !job && (
