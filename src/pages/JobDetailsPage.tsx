@@ -54,17 +54,7 @@ export default function JobDetailsPage() {
         };
     }, [id]);
 
-    if(isLoading) {
-        return <p>Loading job details...</p>;
-    }
-
-    if(errorMessage) {
-        return <p role="alert">{errorMessage}</p>;
-    };
-
-    if(!job) {
-        return <p>Job not found.</p>;
-    }
+  
 
 
     return (
@@ -77,34 +67,49 @@ export default function JobDetailsPage() {
                 {backPath === "/" ? "← Back to categories" : "← Back to jobs"}
             </Link>
 
-            <h1 className="text-2xl font-bold">
-                {job.title}
-            </h1>
+            {isLoading && <p>Loading job details...</p>}
 
-            <p className="mt-2 text-slate-700">
-                {job.company || "Company not provided"}
-            </p>
+            {!isLoading && errorMessage && (
+                <p role="alert">{errorMessage}</p>
+            )}
 
-            <p className="mt-1 text-slate-500">
-                {job.city || "Location not provided"}
-            </p>
+            {!isLoading && !errorMessage && !job && (
+                <p>Job not found.</p>
+            )}
 
-            <p className="mt-6 whitespace-pre-wrap text-slate-700">
-                {job.description || "No description provided."}
-            </p>
+            
+            {!isLoading && !errorMessage && job && (
+            <>
+                <h1 className="text-2xl font-bold">
+                    {job.title}
+                </h1>
 
-            {job.sourceURL && (
-                <a
-                    href={job.sourceURL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-700"
-                >
-                    Apply on original website
-                </a>
-            )
+                <p className="mt-2 text-slate-700">
+                    {job.company || "Company not provided"}
+                </p>
 
-            }
+                <p className="mt-1 text-slate-500">
+                    {job.city || "Location not provided"}
+                </p>
+
+                <p className="mt-6 whitespace-pre-wrap text-slate-700">
+                    {job.description || "No description provided."}
+                </p>
+
+                {job.sourceURL && (
+                    <a
+                        href={job.sourceURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-700"
+                    >
+                        Apply on original website
+                    </a>
+                    )
+                }
+                </>
+            )}
+
             
         </main>
     )
