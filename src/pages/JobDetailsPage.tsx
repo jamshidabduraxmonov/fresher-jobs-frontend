@@ -29,7 +29,7 @@ export default function JobDetailsPage() {
                 const data = await fetchJobById(id);
 
                 if(!ignore) {
-                    setJob(data.job);
+                    setJob(data === null ? null : data.job);
                 }
 
             }catch(error){
@@ -37,7 +37,7 @@ export default function JobDetailsPage() {
 
                 if(!ignore) {
                     setErrorMessage(
-                        "Unable to load this job. It may no longer be available."
+                        "We couldn't load this job. Please try again."
                     );
                 }
             } finally{
@@ -74,7 +74,7 @@ export default function JobDetailsPage() {
             )}
 
             {!isLoading && !errorMessage && !job && (
-                <p>Job not found.</p>
+                <p>This job is no longer available or the link is incorrect.</p>
             )}
 
             

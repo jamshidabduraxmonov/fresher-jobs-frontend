@@ -51,10 +51,14 @@ export const fetchJobs = async (filters: JobFilters = {}): Promise<JobsResponse>
 
 export const fetchJobById = async (
     id: string
-): Promise<JobResponse> => {
+): Promise<JobResponse | null> => {
     const response = await fetch(
         `${apiURL}/api/jobs/${encodeURIComponent(id)}`
     );
+
+    if (response.status === 404){
+        return null;
+    }
 
     if(!response.ok){
         throw new Error(
