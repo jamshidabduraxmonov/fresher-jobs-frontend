@@ -4,6 +4,26 @@ import { fetchJobById } from "../api/jobsApi"
 import { useEffect, useState } from "react";
 
 
+const formatPostedDate = (value: string | null): string => {
+    if(!value) {
+        return "Posting date not provided";
+    }
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "Posting date not available";
+    }
+
+    return `Posted at ${date.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "Asia/Dubai",
+    })}`;
+};
+
+
 export default function JobDetailsPage() {
     const { id } = useParams();
     const location = useLocation();
@@ -97,6 +117,8 @@ export default function JobDetailsPage() {
                 <h1 className="text-2xl font-bold">
                     {job.title}
                 </h1>
+
+                <p>{formatPostedDate(job.postedAt)}</p>
 
                 <p className="mt-2 text-slate-700">
                     {job.company || "Company not provided"}
