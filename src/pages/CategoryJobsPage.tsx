@@ -37,6 +37,7 @@ export default function CategoryJobsPage() {
         setSearchParams(nextParams);
       }
 
+      const [retryCount, setRetryCount] = useState(0);
 
       useEffect(()=> {
 
@@ -95,7 +96,7 @@ export default function CategoryJobsPage() {
           return ()=> {
             ignore = true;
           }
-      }, [activeCategory, selectedCategory, currentPage]);
+      }, [activeCategory, selectedCategory, currentPage, retryCount]);
 
 
       if(!activeCategory){
@@ -137,12 +138,23 @@ export default function CategoryJobsPage() {
               )}
 
               {!isLoading && errorMessage && (
-                <p 
-                  role="alert"
-                  className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700"
-                >
-                  {errorMessage}
-                </p>
+                <div>
+                    <p 
+                      role="alert"
+                      className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700"
+                    >
+                      {errorMessage}
+                    </p>
+
+                    <button
+                        type="button"
+                        onClick={() => setRetryCount(count => count + 1)}
+                        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700" 
+                    >
+                        Try Again
+                    </button>
+                </div>
+                
               )}
 
 
