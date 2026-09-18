@@ -115,6 +115,13 @@ export default function CategoryJobsPage() {
               <p className="mt-2 text-slate-600">
                 This job category does not exist.
               </p>
+
+              <Link
+                  to="/"
+                  className="mt-6 inline-block text-slate-900 underline"
+              >
+                  Back to categories
+              </Link>
           </main>
         )
       };
