@@ -24,6 +24,26 @@ const formatPostedDate = (value: string | null): string => {
 };
 
 
+
+    const getApplicationURL = (value: string | null): string | null => {
+        if(!value) {
+            return null;
+        }
+
+        try {
+            const url = new URL(value);
+
+            if(url.protocol === "https:" || url.protocol === "http:") {
+                return url.href;
+            }
+
+            return null;
+        }catch(error){
+            return null;
+        }
+    }
+
+
 export default function JobDetailsPage() {
     const { id } = useParams();
     const location = useLocation();
@@ -35,6 +55,8 @@ export default function JobDetailsPage() {
         useState<string | null>(null);
 
     const [retryCount, setRetryCount] = useState(0);
+
+    const applicationURL = getApplicationURL(job?.sourceURL ?? null);
 
 
     useEffect(()=> {
@@ -132,17 +154,22 @@ export default function JobDetailsPage() {
                     {job.description || "No description provided."}
                 </p>
 
-                {job.sourceURL && (
+
+
+                {applicationURL ? (
                     <a
-                        href={job.sourceURL}
+                        href={applicationURL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-700"
                     >
                         Apply on original website
                     </a>
-                    )
-                }
+                ) : (
+                    <p>
+                        An application link is not available for this job.
+                    </p>
+                )}
                 </>
             )}
 
