@@ -99,6 +99,12 @@ export default function CategoryJobsPage() {
       }, [activeCategory, selectedCategory, currentPage, retryCount]);
 
 
+
+      const isPageOutOfRange =
+            pagination !== null &&
+            currentPage > Math.max(1, pagination.totalPages);
+
+
       if(!activeCategory){
           return(
           <main className="min-h-screen bg-slate-100 px-4 py-8">
@@ -157,8 +163,26 @@ export default function CategoryJobsPage() {
                 
               )}
 
+              {!isLoading && !errorMessage && isPageOutOfRange && (
+                <div>
+                  <p>
+                    This page of jobs does not exist.
+                  </p>
 
-              {!isLoading && !errorMessage && (
+                  <button
+                        type="button"
+                        onClick={()=> changePage(1)}
+                        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+                  >
+                    Go to first page
+                  </button>
+                </div>
+              )
+
+              }
+
+
+              {!isLoading && !errorMessage && !isPageOutOfRange && (
                 jobs.length === 0 ? (
                   <p className="rounded-xl bg-white p-6 text-center text-slate-600">
                     No jobs are currently available.
@@ -173,7 +197,7 @@ export default function CategoryJobsPage() {
               )}
 
 
-              {!isLoading && !errorMessage && pagination && pagination.totalPages > 0 && (
+              {!isLoading && !errorMessage && pagination && pagination.totalPages > 0 && !isPageOutOfRange && (
                 <div>
                     <button
                         type="button"
