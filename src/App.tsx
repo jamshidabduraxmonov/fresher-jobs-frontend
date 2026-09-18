@@ -1,5 +1,5 @@
 import CategoryJobsPage from "./pages/CategoryJobsPage.tsx";
-import { Routes, Route } from "react-router"
+import { Routes, Route, Link } from "react-router"
 import HomePage  from "./pages/HomePage.tsx"
 import JobDetailsPage from "./pages/JobDetailsPage.jsx"
 
@@ -21,6 +21,30 @@ function App() {
             path="/jobs/:id"
             element={<JobDetailsPage />}
           />
+
+          <Route 
+                path="*"
+                element={
+                    <main>
+                        <h1>
+                            Page not found
+                        </h1>
+
+                        <p>
+                            The page you're looking for doesn't exist.
+                        </p>
+
+                        <Link
+                            to="/"
+                            className="mt-6 inline-block text-slate-900 underline"
+                        >
+                            Back to categories
+                        </Link>
+                    </main>
+                }
+          />
+            
+          
       </Routes>
   );
 }
