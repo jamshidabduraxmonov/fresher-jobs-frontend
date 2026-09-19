@@ -4,7 +4,7 @@ import { fetchJobs } from "../api/jobsApi.ts";
 import type {Job, Pagination} from "../types/job.ts";
 import  JobCard  from "../components/JobCard.tsx"
 import { categories } from "../data/categories.ts";
-import { Link, useParams, useSearchParams } from "react-router";
+import { Link, useParams, useSearchParams, useLocation } from "react-router";
 
 
 
@@ -17,6 +17,8 @@ export default function CategoryJobsPage() {
       const [pagination, setPagination] = useState<Pagination | null>(null);
       
       const { category: selectedCategory } = useParams();
+
+      const location = useLocation();
 
       const [searchParams, setSearchParams] = useSearchParams();
 
@@ -97,6 +99,55 @@ export default function CategoryJobsPage() {
             ignore = true;
           }
       }, [activeCategory, selectedCategory, currentPage, retryCount]);
+
+
+
+
+      useEffect(()=> {
+
+        if(location.state?.restoreScroll !== true) return;
+
+          if(
+            !activeCategory ||
+            isLoading ||
+            errorMessage ||
+            !pagination ||
+            pagination.page !== currentPage ||
+            jobs.length === 0
+          ){
+            return;
+          }
+
+          const scrollKey =
+              `jobs-scroll:${location.pathname}${location.search}`;
+
+          const savedPosition = sessionStorage.getItem(scrollKey);
+          
+          if(savedPosition === null) return;
+
+          const scrollY = Number(savedPosition);
+
+          if (Number.isFinite(scrollY) && scrollY >= 0){
+            window.scrollTo({
+              top: scrollY,
+              left: 0,
+              behavior: "instant",
+            });
+          }
+
+          sessionStorage.removeItem(scrollKey);
+
+      }, [
+        location,
+        activeCategory,
+        isLoading,
+        errorMessage,
+        pagination,
+        currentPage,
+        jobs.length,
+      ])
+
+
 
 
 

@@ -106,6 +106,7 @@ export default function JobDetailsPage() {
 
             <Link
                 to={backPath}
+                state={{ restoreScroll: true }}
                 className="mb-4 inline-block text-sm font-medium text-slate-600 hover:text-slate-900"
             >
                 {backPath === "/" ? "← Back to categories" : "← Back to jobs"}
