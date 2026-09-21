@@ -8,9 +8,17 @@ function HomePage(){
         <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
             <div className="mx-auto max-w-2xl">
                 <header>
-                    <p className="text-xl font-bold tracking-tight">
-                        Fresher Jobs UAE
-                    </p>
+                    <div className="flex items-center gap-3">
+                        <img 
+                            src="/logo.svg"
+                            alt=""
+                            className="h-12 w-10 shrink-0"
+                        />
+
+                        <p className="text-xl font-bold tracking-tight">
+                            Fresher Jobs UAE
+                        </p>
+                    </div>
 
                     <h1 className="mt-8 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
                         Find your next opportunity.
@@ -27,6 +35,7 @@ function HomePage(){
                             key={category.value}
                             value={category.value}
                             label={category.label}
+                            image={category.image}
                         />
                     ))}
                 </div>
