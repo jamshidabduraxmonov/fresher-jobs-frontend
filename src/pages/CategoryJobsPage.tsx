@@ -169,7 +169,7 @@ export default function CategoryJobsPage() {
 
               <Link
                   to="/"
-                  className="mt-6 inline-block text-slate-900 underline"
+                  className="mb-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
               >
                   Back to categories
               </Link>
@@ -178,7 +178,7 @@ export default function CategoryJobsPage() {
       };
 
       return(
-        <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-900">
+        <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
           <div className="mx-auto max-w-2xl">
               <Link
                   to="/"
@@ -187,7 +187,7 @@ export default function CategoryJobsPage() {
                   ← Back to categories
               </Link>
 
-              <h1 className="mb-6 text-2xl font-bold">
+              <h1 className="mb-6 text-2xl font-bold tracking-tight sm:text-3xl">
                 {activeCategory.label}
               </h1>
 
@@ -256,17 +256,17 @@ export default function CategoryJobsPage() {
 
 
               {!isLoading && !errorMessage && pagination && pagination.totalPages > 0 && !isPageOutOfRange && (
-                <div>
+                <div className="mt-8 flex items-center justify-between gap-2 border-t border-slate-200 pt-5">
                     <button
                         type="button"
                         onClick={() => changePage(currentPage -1)}
                         disabled={!pagination.hasPreviousPage}
-                        className="rounded-lg border px-4 py-2 disabled:opacity-40"
+                        className="min-h-11 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-teal-800 transition-colors hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
                     >
                         Previous
                     </button>
 
-                    <span>
+                    <span className="text-center text-xs font-medium text-slate-600 sm:text-sm">
                         Page {pagination.page} of {pagination.totalPages}
                     </span>
 
@@ -274,7 +274,7 @@ export default function CategoryJobsPage() {
                         type="button"
                         onClick={()=> changePage(currentPage + 1)}
                         disabled={!pagination.hasNextPage}
-                        className="rounded-lg border px-4 py-2 disabled:opacity-40"
+                        className="min-h-11 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-teal-800 transition-colors hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
                     >
                         Next
                     </button>
