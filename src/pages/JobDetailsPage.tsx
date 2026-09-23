@@ -39,6 +39,7 @@ const formatPostedDate = (value: string | null): string => {
 
             return null;
         }catch(error){
+            console.error(error);
             return null;
         }
     }
