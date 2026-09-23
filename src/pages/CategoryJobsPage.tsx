@@ -158,7 +158,8 @@ export default function CategoryJobsPage() {
 
       if(!activeCategory){
           return(
-          <main className="min-h-screen bg-slate-100 px-4 py-8">
+          <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
+            <div className="mx-auto max-w-2xl">
               <h1 className="text-2xl font-bold text-slate-900">
                 Category not found
               </h1>
@@ -169,10 +170,11 @@ export default function CategoryJobsPage() {
 
               <Link
                   to="/"
-                  className="mb-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
+                  className="mt-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
               >
                   Back to categories
               </Link>
+            </div>
           </main>
         )
       };
@@ -182,7 +184,7 @@ export default function CategoryJobsPage() {
           <div className="mx-auto max-w-2xl">
               <Link
                   to="/"
-                  className="mb-4 inline-block text-sm font-medium text-slate-600 hover:text-slate-900"
+                  className="mb-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
               >
                   ← Back to categories
               </Link>
@@ -195,17 +197,17 @@ export default function CategoryJobsPage() {
 
               {isLoading && (
                 <p role="status"
-                   className="rounded-xl bg-white p-6 text-center text-slate-600"
+                   className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-slate-600"
                 >
                   Loading jobs...
                 </p>
               )}
 
               {!isLoading && errorMessage && (
-                <div>
+                <div className="rounded-2xl border border-red-200 bg-red-50 p-6">
                     <p 
                       role="alert"
-                      className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700"
+                      className="text-sm leading-relaxed text-red-800"
                     >
                       {errorMessage}
                     </p>
@@ -213,7 +215,7 @@ export default function CategoryJobsPage() {
                     <button
                         type="button"
                         onClick={() => setRetryCount(count => count + 1)}
-                        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700" 
+                        className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700" 
                     >
                         Try Again
                     </button>
@@ -222,15 +224,15 @@ export default function CategoryJobsPage() {
               )}
 
               {!isLoading && !errorMessage && isPageOutOfRange && (
-                <div>
-                  <p>
+                <div className="rounded-2xl border border-slate-200 bg-white p-6">
+                  <p className="text-sm leading-relaxed text-slate-600">
                     This page of jobs does not exist.
                   </p>
 
                   <button
                         type="button"
                         onClick={()=> changePage(1)}
-                        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+                        className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
                   >
                     Go to first page
                   </button>
@@ -242,7 +244,7 @@ export default function CategoryJobsPage() {
 
               {!isLoading && !errorMessage && !isPageOutOfRange && (
                 jobs.length === 0 ? (
-                  <p className="rounded-xl bg-white p-6 text-center text-slate-600">
+                  <p className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-slate-600">
                     No jobs are currently available.
                   </p>
                 ) : (
