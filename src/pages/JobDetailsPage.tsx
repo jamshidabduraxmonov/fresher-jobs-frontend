@@ -116,17 +116,26 @@ export default function JobDetailsPage() {
                     {backPath === "/" ? "← Back to categories" : "← Back to jobs"}
                 </Link>
 
-                {isLoading && <p>Loading job details...</p>}
+                {isLoading && (
+                    <p
+                        role="status"
+                        className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-slate-600"
+                    >
+                        Loading job details...
+                    </p>
+                )}
 
                 {!isLoading && errorMessage && (
 
-                    <div>
-                        <p role="alert">{errorMessage}</p>
+                    <div className="rounded-2xl border border-red-200 bg-red-50 p-6">
+                        <p role="alert" className="text-sm leading-relaxed text-red-800">
+                            {errorMessage}
+                        </p>
 
                         <button
                             type="button"
                             onClick={()=> setRetryCount(count=> count+1)}
-                            className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+                            className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
                         >
                             Try again
                         </button>
@@ -135,7 +144,15 @@ export default function JobDetailsPage() {
                 )}
 
                 {!isLoading && !errorMessage && !job && (
-                    <p>This job is no longer available or the link is incorrect.</p>
+                    <div className="rounded-2xl border border-slate-200 bg-white p-6">
+                        <h1 className="text-xl font-bold">
+                            Job unavailable
+                        </h1>
+
+                        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                            This job is no longer available or the link is incorrect.
+                        </p>
+                    </div>
                 )}
 
                 
