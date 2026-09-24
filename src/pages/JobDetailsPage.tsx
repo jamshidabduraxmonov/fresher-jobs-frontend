@@ -50,7 +50,6 @@ export default function JobDetailsPage() {
     useEffect(()=> {
         if(!id) return;
 
-        setIsDescriptionExpanded(false);
 
         let ignore = false;
 
@@ -64,6 +63,7 @@ export default function JobDetailsPage() {
 
                 if(!ignore) {
                     setJob(data === null ? null : data.job);
+                    setIsDescriptionExpanded(false);
                 }
 
             }catch(error){
