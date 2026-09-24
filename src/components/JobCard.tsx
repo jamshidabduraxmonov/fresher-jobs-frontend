@@ -1,6 +1,5 @@
 import type { Job } from "../types/job";
 import { Link, useLocation } from "react-router";
-import { categories } from '../data/categories'
 import FormatPostedDate from "../utils/formatPostedDate"
 
 type JobCardProps = {
@@ -12,34 +11,24 @@ const JobCard = ({ job } : JobCardProps) => {
 
     const location = useLocation();
 
-    const categoryLabels = job.categories.map(value=> {
-        const category = categories.find(item => item.value === value);
-
-        return category?.label ?? value.replaceAll("_", " ");
-    })
-
     return(
-        <article className="rounded-2xl border border-slate-200 bg-white p-5 text-[#142632] transition-shadow hover:shadow-sm">
-            <h2 className="text-lg font-bold leading-snug tracking-tight break-words">
-            <Link
-                onClick={() => {
-                    const scrollKey =
-                        `jobs-scroll:${location.pathname}${location.search}`;
-                    
-                        sessionStorage.setItem(
-                            scrollKey,
-                            String(window.scrollY)
-                        );
+        <Link
+            to={`/jobs/${encodeURIComponent(job.id)}`}
+            state={{ from: location.pathname + location.search }}
+            onClick={() => {
+                const scrollKey =
+                    `jobs-scroll:${location.pathname}${location.search}`;
 
-                }}
-                
-                state={{ from: location.pathname + location.search }}
-                to={`/jobs/${encodeURIComponent(job.id)}`}
-                className="rounded-sm hover:text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
-            >
+                sessionStorage.setItem(
+                    scrollKey,
+                    String(window.scrollY)
+                );
+            }}
+            className="block rounded-2xl border border-slate-200 bg-white p-5 text-[#142632] transition-colors hover:border-teal-400 hover:bg-teal-50/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
+        >
+
+            <h2 className="text-lg font-bold leading-snug tracking-tight break-words">
                 {job.title}
-            </Link>    
-                
             </h2>
 
             <p className="mt-3 text-sm font-medium text-slate-700">
@@ -65,10 +54,10 @@ const JobCard = ({ job } : JobCardProps) => {
                 </div>
             </div>
 
+        </Link>
             
 
             
-        </article>
     );
 };
 
