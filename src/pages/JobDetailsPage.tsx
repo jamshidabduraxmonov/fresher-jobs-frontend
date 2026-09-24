@@ -2,26 +2,10 @@ import { useParams, Link, useLocation } from "react-router";
 import type { Job } from "../types/job";
 import { fetchJobById } from "../api/jobsApi"
 import { useEffect, useState } from "react";
+import FormatPostedDate from '../utils/formatPostedDate.ts'
 
 
-const formatPostedDate = (value: string | null): string => {
-    if(!value) {
-        return "Posting date not provided";
-    }
 
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-        return "Posting date not available";
-    }
-
-    return `Posted at ${date.toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        timeZone: "Asia/Dubai",
-    })}`;
-};
 
 
 
@@ -164,7 +148,7 @@ export default function JobDetailsPage() {
                     </h1>
 
                     <p className="mt-3 text-sm text-slate-500">
-                        {formatPostedDate(job.postedAt)}
+                        {FormatPostedDate(job.postedAt)}
                     </p>
 
                     <p className="mt-5 font-semibold text-slate-800">

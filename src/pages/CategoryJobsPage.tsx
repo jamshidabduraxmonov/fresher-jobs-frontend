@@ -8,6 +8,7 @@ import { Link, useParams, useSearchParams, useLocation } from "react-router";
 
 
 
+
 export default function CategoryJobsPage() {
       const [jobs, setJobs] = useState<Job[]>([]);
       const [isLoading, setIsLoading] = useState(true);

@@ -1,6 +1,7 @@
 import type { Job } from "../types/job";
 import { Link, useLocation } from "react-router";
 import { categories } from '../data/categories'
+import FormatPostedDate from "../utils/formatPostedDate"
 
 type JobCardProps = {
     job: Job;
@@ -49,17 +50,22 @@ const JobCard = ({ job } : JobCardProps) => {
                 {job.city || "Location not provided"}
             </p>
 
-            <p className="mt-3 text-xs leading-relaxed text-slate-500">
-                {categoryLabels.length > 0
-                    ? categoryLabels.join(" · ")
-                    : "Category not provided"}
-            </p>
+            
+            <div>
+                {job.fresherFriendly && (
+                    <span className="mt-4 inline-block rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800">
+                        FresherFriendly
+                    </span>
+                )}
 
-            {job.fresherFriendly && (
-                <span className="mt-4 inline-block rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800">
-                    FresherFriendly
-                </span>
-            )}
+                 <div className="mt-3 flex justify-end">
+                    <p className="rounded-md border border-green-300 bg-green-100 px-3 py-2 text-xs font-bold tracking-wide text-green-900">
+                        {FormatPostedDate(job.postedAt)}
+                    </p>
+                </div>
+            </div>
+
+            
 
             
         </article>
