@@ -41,11 +41,16 @@ export default function JobDetailsPage() {
 
     const [retryCount, setRetryCount] = useState(0);
 
+    const [isDescriptionExpanded, setIsDescriptionExpanded] =
+            useState(false);
+
     const applicationURL = getApplicationURL(job?.sourceURL ?? null);
 
 
     useEffect(()=> {
         if(!id) return;
+
+        setIsDescriptionExpanded(false);
 
         let ignore = false;
 
@@ -84,7 +89,17 @@ export default function JobDetailsPage() {
     }, [id, retryCount]);
 
   
+    const description =
+        job?.description?.trim() || "No description provided.";
 
+    const descriptionLimit = 600;
+
+    const isLongDescription  = description.length > descriptionLimit;
+
+    const visibleDescription =
+        isLongDescription && !isDescriptionExpanded
+            ? `${description.slice(0, descriptionLimit).trimEnd()}...`
+            : description;
 
     return (
         <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
@@ -163,9 +178,23 @@ export default function JobDetailsPage() {
                         About this job
                     </h2>
 
-                    <p className="mt-3 whitespace-pre-wrap break-words text-base leading-7 text-slate-700">
-                        {job.description || "No description provided."}
+                    <p id="job-description" className="mt-3 whitespace-pre-wrap break-words text-base leading-7 text-slate-700">
+                        {visibleDescription}
                     </p>
+
+                    {isLongDescription && (
+                        <button
+                            type="button"
+                            aria-expanded={isDescriptionExpanded}
+                            aria-controls="job-description"
+                            onClick={()=> {
+                                setIsDescriptionExpanded(expanded => !expanded);
+                            }}
+                            className="mt-3 inline-flex min-h-11 items-center rounded-lg px-2 text-sm font-semibold text-teal-700 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+                         >
+                            {isDescriptionExpanded ? "Show less ↑" : "Read more ↓"}
+                        </button>
+                    )}
 
 
 
