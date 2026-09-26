@@ -5,6 +5,7 @@ import type {Job, Pagination} from "../types/job.ts";
 import  JobCard  from "../components/JobCard.tsx"
 import { categories } from "../data/categories.ts";
 import { Link, useParams, useSearchParams, useLocation } from "react-router";
+import { updatePageMeta } from "../utils/updatePageMeta.ts";
 
 
 
@@ -155,6 +156,18 @@ export default function CategoryJobsPage() {
       const isPageOutOfRange =
             pagination !== null &&
             currentPage > Math.max(1, pagination.totalPages);
+
+      
+
+
+      useEffect(()=> {
+        if (!activeCategory) return;
+
+        updatePageMeta(
+          `${activeCategory.heading} | Fresher Jobs UAE`,
+          activeCategory.description
+        );
+      }, [activeCategory]);
 
 
       if(!activeCategory){

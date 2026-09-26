@@ -3,6 +3,7 @@ import type { Job } from "../types/job";
 import { fetchJobById } from "../api/jobsApi"
 import { useEffect, useState } from "react";
 import FormatPostedDate from '../utils/formatPostedDate.ts'
+import { updatePageMeta } from '../utils/updatePageMeta.ts';
 
 
 
@@ -100,6 +101,20 @@ export default function JobDetailsPage() {
         isLongDescription && !isDescriptionExpanded
             ? `${description.slice(0, descriptionLimit).trimEnd()}...`
             : description;
+
+
+    
+    useEffect(()=> {
+        if(!job) return;
+
+        updatePageMeta(
+            `${job.title} at ${job.company} | Fresher Jobs UAE`,
+            `View ${job.title} job details at ${job.company} in ${job.city}. Check the role description and apply online.`
+        );
+    }, [job]);
+
+
+
 
     return (
         <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">

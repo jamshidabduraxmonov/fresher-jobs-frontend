@@ -1,7 +1,21 @@
 import { categories } from "../data/categories";
 import CategoryCard from "../components/CategoryCard";
+import { useEffect } from "react";
+import { updatePageMeta } from "../utils/updatePageMeta";
 
 function HomePage() {
+
+
+    useEffect(()=> {
+        updatePageMeta(
+            "Fresher and Entry-level Jobs in UAE | Fresher Jobs UAE",
+            "Find fresh, entry-level and no-experience job opportunities across the UAE in hospitality, retail, food and beverage, customer service and general services."
+        );
+    }, []);
+
+
+
+
     return (
         <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
             <div className="mx-auto max-w-2xl">
