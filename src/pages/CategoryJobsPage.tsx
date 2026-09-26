@@ -183,16 +183,22 @@ export default function CategoryJobsPage() {
       return(
         <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
           <div className="mx-auto max-w-2xl">
-              <Link
-                  to="/"
-                  className="mb-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
-              >
-                  ← Back to categories
-              </Link>
+              <header className="mb-8">
+                  <Link
+                      to="/"
+                      className="text-sm font-medium text-teal-700 hover:text-teal-800"
+                  >
+                      ← Back to categories
+                  </Link>
 
-              <h1 className="mb-6 text-2xl font-bold tracking-tight sm:text-3xl">
-                {activeCategory.label}
-              </h1>
+                  <h1 className="mt-5 text-[2rem] font-bold leading-tight tracking-[-0.025em] text-slate-900 sm:text-[2.3rem]">
+                      {activeCategory.heading}
+                  </h1>
+
+                  <p className="mt-3 max-w-xl text-[1rem] leading-relaxed text-slate-600">
+                      {activeCategory.description}
+                  </p>
+              </header>
 
 
 
