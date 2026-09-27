@@ -4,6 +4,7 @@ import { fetchJobById } from "../api/jobsApi"
 import { useEffect, useState } from "react";
 import FormatPostedDate from '../utils/formatPostedDate.ts'
 import { updatePageMeta } from '../utils/updatePageMeta.ts';
+import { updateJobStructuredData} from '../utils/updateJobStructuredData.ts'
 
 
 
@@ -111,6 +112,14 @@ export default function JobDetailsPage() {
             `${job.title} at ${job.company} | Fresher Jobs UAE`,
             `View ${job.title} job details at ${job.company} in ${job.city}. Check the role description and apply online.`
         );
+
+        updateJobStructuredData(job);
+
+
+        return ()=> {
+            document.querySelector('script[data-job-structured-data="true"]')
+                ?.remove();
+        };
     }, [job]);
 
 
