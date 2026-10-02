@@ -24,7 +24,8 @@ const JobCard = ({ job } : JobCardProps) => {
                     String(window.scrollY)
                 );
             }}
-            className="block rounded-2xl border border-slate-200 bg-white p-5 text-[#142632] transition-colors hover:border-teal-400 hover:bg-teal-50/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
+            className="block rounded-2xl border border-slate-200 bg-white p-5 text-[#142632] transition-colors hover:border-teal-400 hover:bg-teal-50/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700
+            transition-all duration-300 ease-out active:scale-[0.96] active:brightness-90"
         >
 
             <h2 className="text-lg font-bold leading-snug tracking-tight break-words">

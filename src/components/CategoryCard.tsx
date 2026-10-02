@@ -10,7 +10,11 @@ function CategoryCard({ value, label, image}: CategoryCardProps) {
     return (
         <Link
             to={`/categories/${value}`}
-            className={`flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700 ${
+            className={`flex h-full flex-col overflow-hidden rounded-2xl border bg-white 
+                transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700  
+                transition-all
+                duration-300 active:scale-[0.96] ease-out active:brightness-90
+                ${
                 value === "freshers"
                     ? "border-teal-600 text-teal-700"
                     : "border-slate-200 text-[#142632]"

@@ -135,7 +135,28 @@ export default function JobDetailsPage() {
                 <Link
                     to={backPath}
                     state={{ restoreScroll: true }}
-                    className="mb-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-teal-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
+                    className="
+                                inline-flex items-center gap-2
+                                rounded-xl border border-[#D9DEDA]
+                                bg-[#0D9488] px-4 py-2.5
+                                text-sm font-semibold text-white
+                                shadow-sm
+
+                                transform-gpu
+                                transition-[transform,box-shadow,background-color]
+                                duration-200
+                                ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                                hover:bg-[#F1F3F0]
+                                hover:shadow-md
+                                hover:text-[#142632]
+
+                                active:scale-[0.96]
+                                active:shadow-none
+                                active:bg-[#E9ECE8]
+
+                                select-none
+                    "
                 >
                     {backPath === "/" ? "← Back to categories" : "← Back to jobs"}
                 </Link>
@@ -227,7 +248,11 @@ export default function JobDetailsPage() {
                             href={applicationURL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-teal-700 px-5 py-3 text-center font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
+                            className="mt-8 inline-flex transition-[transform,filter]
+                            duration-300
+                            ease-out
+                            active:scale-[0.97]
+                            active:brightness-95 min-h-12 w-full items-center justify-center rounded-xl bg-teal-700 px-5 py-3 text-center font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
                         >
                             Apply on original website
                         </a>

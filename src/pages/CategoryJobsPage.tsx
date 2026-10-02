@@ -199,7 +199,28 @@ export default function CategoryJobsPage() {
               <header className="mb-8">
                   <Link
                       to="/"
-                      className="text-sm font-medium text-teal-700 hover:text-teal-800"
+                      className="
+                                inline-flex items-center gap-2
+                                rounded-xl border border-[#D9DEDA]
+                                bg-[#0D9488] px-4 py-2.5
+                                text-sm font-semibold text-white
+                                shadow-sm
+
+                                transform-gpu
+                                transition-[transform,box-shadow,background-color]
+                                duration-200
+                                ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                                hover:bg-[#F1F3F0]
+                                hover:shadow-md
+                                hover:text-[#142632]
+
+                                active:scale-[0.96]
+                                active:shadow-none
+                                active:bg-[#E9ECE8]
+
+                                select-none
+                      "
                   >
                       ← Back to categories
                   </Link>
