@@ -5,7 +5,7 @@ import JobDetailsPage from "./pages/JobDetailsPage.jsx"
 import { useEffect } from "react";
 import { Capacitor } from "@capacitor/core";
 import { App as CapacitorApp } from "@capacitor/app";
-import {PrivacyPolicyPage} from './pages/PrivacyPolicyPage.tsx';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage.tsx';
 
 
 function App() {
