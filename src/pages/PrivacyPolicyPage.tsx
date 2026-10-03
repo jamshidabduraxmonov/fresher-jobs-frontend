@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage() {
             <p className="mt-3">
               <strong>Fresher Jobs UAE</strong>
               <br />
-              Email: YOUR_EMAIL_HERE
+              Email: madebyjamshid@gmail.com
             </p>
           </section>
         </div>
