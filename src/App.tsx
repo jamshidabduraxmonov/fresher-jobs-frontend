@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Capacitor } from "@capacitor/core";
 import { App as CapacitorApp } from "@capacitor/app";
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.tsx';
+import AboutPage from './pages/About.tsx';
 
 
 function App() {
@@ -48,6 +49,11 @@ function App() {
           <Route 
             path="/jobs/:id"
             element={<JobDetailsPage />}
+          />
+
+          <Route
+            path="/about"
+            element={<AboutPage />}
           />
 
           <Route 
