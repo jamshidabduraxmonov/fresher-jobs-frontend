@@ -7,6 +7,15 @@ export const categories = [
     description:
           "Find active fresher, entry-level and no-experience job opportunities across the UAE.",
   },
+
+  {
+    value: "software_development",
+    label: "Software Development",
+    image: "/images/categories/software_dev.png",
+    heading: "Software Development",
+    description: "Explore software development vacancies across the UAE - frontend and backend."
+  },
+
   {
     value: "food_beverage", 
     label: "Food & Beverage", 
@@ -44,4 +53,5 @@ export const categories = [
     description:
           "Find active cleaner, security guard, warehouse and general service jobs across the UAE.",
   },
+  
 ]
