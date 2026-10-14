@@ -19,9 +19,8 @@ function HomePage() {
     return (
         <main className="min-h-screen bg-[#F7F8F6] px-4 py-6 text-[#142632] sm:px-6 sm:py-10">
             <div className="mx-auto max-w-2xl">
-               <header className="max-w-3xl">
-            
-                    <div className="flex items-center gap-3">
+
+                <div className="fixed bg-white flex w-[100%] h-12 top-0 py-8 items-center gap-3">
                         <img
                         src="/logo.svg"
                         alt="Fresher Jobs UAE logo"
@@ -31,6 +30,9 @@ function HomePage() {
                         Fresher Jobs UAE
                         </span>
                     </div>
+
+
+               <header className="max-w-3xl py-4">
 
                     
                     <h1 className="mt-9 text-[2.4rem] font-extrabold leading-[1.08] tracking-[-0.03em] text-slate-900 sm:text-[2.9rem] sm:leading-[1.05]">
