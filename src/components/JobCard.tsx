@@ -44,7 +44,7 @@ const JobCard = ({ job } : JobCardProps) => {
             <div>
                 {job.fresherFriendly && (
                     <span className="mt-4 inline-block rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800">
-                        FresherFriendly
+                        Fresher-friendly
                     </span>
                 )}
 
